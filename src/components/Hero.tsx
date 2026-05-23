@@ -3,20 +3,21 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center text-center pt-14 pb-10">
-      {/* Logo */}
-      <div className="relative mb-5">
-        <Image
-          src="/logo.png"
-          alt="$ATM"
-          width={120}
-          height={120}
-          className="rounded-full"
-          priority
-          style={{ filter: "drop-shadow(0 0 40px rgba(39,117,202,0.25))" }}
-        />
+    <section className="flex flex-col items-center text-center pt-10 pb-10">
+      {/* Hero Image */}
+      <div className="relative w-full max-w-2xl mb-6">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+          <Image
+            src="/hero.png"
+            alt="$ATM - USDC Distribution"
+            fill
+            className="object-cover"
+            priority
+            style={{ filter: "drop-shadow(0 0 60px rgba(39,117,202,0.3))" }}
+          />
+        </div>
         <div
-          className="absolute inset-0 rounded-full border border-[#2775CA]/20"
+          className="absolute inset-0 rounded-2xl border border-[#2775CA]/20 pointer-events-none"
           style={{ animation: "ring-ping 3s ease-out infinite" }}
         />
       </div>
@@ -44,7 +45,7 @@ export default function Hero() {
           href="#how"
           className="inline-flex items-center border border-[#2775CA]/20 hover:border-[#2775CA]/40 text-[#2775CA] text-sm font-medium px-5 py-2.5 rounded-full transition-all"
         >
-          How It Works ↓
+          How It Works
         </a>
       </div>
 

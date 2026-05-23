@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 /* ── Helpers ── */
-const trunc = (a: string) => `${a.slice(0, 4)}…${a.slice(-4)}`;
+const trunc = (a: string) => `${a.slice(0, 4)}...${a.slice(-4)}`;
 const ago = (ts: number) => {
   const d = Math.floor((Date.now() - ts) / 1000);
   if (d < 60) return `${d}s ago`;
@@ -41,33 +41,33 @@ function LiveFeed() {
   useEffect(() => { const i = setInterval(() => tick((t) => t + 1), 5000); return () => clearInterval(i); }, []);
 
   return (
-    <div className="card p-4 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3 shrink-0">
-        <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white">🏧 ATM Live Feed</h2>
+    <div className="card p-5 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-4 shrink-0">
+        <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-white">ATM Live Feed</h2>
         <div className="flex items-center gap-1.5">
-          <span className="relative flex h-1.5 w-1.5">
+          <span className="relative flex h-2 w-2">
             <span className="absolute inset-0 rounded-full bg-[#2775CA] animate-ping opacity-75" />
-            <span className="relative block h-1.5 w-1.5 rounded-full bg-[#2775CA]" />
+            <span className="relative block h-2 w-2 rounded-full bg-[#2775CA]" />
           </span>
-          <span className="text-[8px] text-[#2775CA] font-bold uppercase tracking-wider">Live</span>
+          <span className="text-[9px] text-[#2775CA] font-bold uppercase tracking-wider">Live</span>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto min-h-0 -mr-1 pr-1">
         {FEED.map((e, i) => (
           <div
             key={i}
-            className="flex items-center justify-between py-2.5 border-b border-white/[0.03] last:border-0 anim-slide-in"
+            className="flex items-center justify-between py-3 border-b border-white/[0.04] last:border-0 anim-slide-in"
             style={{ animationDelay: `${i * 40}ms` }}
           >
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-[10px] font-bold text-[#2775CA]"
-                   style={{ background: "rgba(39,117,202,0.06)", border: "1px solid rgba(39,117,202,0.1)" }}>$</div>
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-[#2775CA]"
+                   style={{ background: "rgba(39,117,202,0.08)", border: "1px solid rgba(39,117,202,0.15)" }}>$</div>
               <div className="min-w-0">
-                <p className="font-mono text-[11px] text-gray-400 truncate">{trunc(e.w)}</p>
-                <p className="text-[9px] text-gray-600">{ago(e.t)}</p>
+                <p className="font-mono text-xs text-gray-400 truncate">{trunc(e.w)}</p>
+                <p className="text-[10px] text-gray-600">{ago(e.t)}</p>
               </div>
             </div>
-            <span className="font-mono text-[13px] font-semibold text-[#2775CA] shrink-0 ml-2">+${e.a}</span>
+            <span className="font-mono text-sm font-semibold text-[#2775CA] shrink-0 ml-2">+${e.a}</span>
           </div>
         ))}
       </div>
@@ -78,22 +78,22 @@ function LiveFeed() {
 /* ── Top holders panel ── */
 function TopHolders() {
   return (
-    <div className="card p-4 h-full flex flex-col">
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white mb-3 shrink-0">🏆 Top Earners</h2>
+    <div className="card p-5 h-full flex flex-col">
+      <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-white mb-4 shrink-0">Top Earners</h2>
       <div className="flex-1 overflow-y-auto min-h-0 -mr-1 pr-1">
         {HOLDERS.map((h, i) => (
           <div
             key={i}
-            className="flex items-center justify-between py-2 border-b border-white/[0.03] last:border-0 anim-slide-in"
+            className="flex items-center justify-between py-2.5 border-b border-white/[0.04] last:border-0 anim-slide-in"
             style={{ animationDelay: `${i * 35}ms` }}
           >
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] font-bold text-gray-600 w-4 text-right tabular-nums">{i + 1}</span>
-              <span className="font-mono text-[11px] text-gray-400">{trunc(h.w)}</span>
-            </div>
             <div className="flex items-center gap-2.5">
-              <span className="text-[9px] text-gray-600 tabular-nums">{h.p}</span>
-              <span className="font-mono text-[11px] font-semibold text-[#2775CA] tabular-nums w-11 text-right">{h.e}</span>
+              <span className="text-[10px] font-bold text-gray-600 w-5 text-right tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-xs text-gray-400">{trunc(h.w)}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] text-gray-600 tabular-nums">{h.p}</span>
+              <span className="font-mono text-xs font-semibold text-[#2775CA] tabular-nums w-12 text-right">{h.e}</span>
             </div>
           </div>
         ))}
@@ -106,9 +106,9 @@ function TopHolders() {
 export default function Panels() {
   return (
     <section className="mb-8">
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3" style={{ height: "420px" }}>
-        <div className="lg:col-span-3 min-h-0"><LiveFeed /></div>
-        <div className="lg:col-span-2 min-h-0"><TopHolders /></div>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4" style={{ minHeight: "400px" }}>
+        <div className="lg:col-span-3 min-h-[350px] lg:min-h-0"><LiveFeed /></div>
+        <div className="lg:col-span-2 min-h-[350px] lg:min-h-0"><TopHolders /></div>
       </div>
     </section>
   );

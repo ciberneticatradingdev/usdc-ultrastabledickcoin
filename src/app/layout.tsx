@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "$ATM — What Is A Bank Without An ATM?",
     description: "Creator rewards → USDC → your wallet. Every 90 seconds.",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
 };
 
