@@ -17,22 +17,20 @@ const LINES = [
   "every 90 seconds. like clockwork. but on-chain.",
   "ser, this is an ATM. act accordingly.",
   "no staking. no locking. just hold and earn.",
-  "BREAKING: banks fear what they can't understand. always have.",
-  "the future of finance is a memecoin with an ATM",
+  "BREAKING: banks fear what they can't understand.",
   "touch grass between distributions. you have 90 seconds.",
-  "JUST IN: local degen won't shut up about his $ATM bag",
   "DYOR. we did ours. it dispenses.",
 ];
 
 export default function Ticker() {
-  const doubled = [...LINES, ...LINES];
+  const items = [...LINES, ...LINES];
   return (
-    <div className="w-full overflow-hidden border-b border-[#2775CA]/10 bg-[#2775CA]/[0.03] py-2.5">
-      <div className="ticker-track">
-        {doubled.map((msg, i) => (
-          <span key={i} className="shrink-0 px-8 text-[13px] text-[#4A9AE8]/70 whitespace-nowrap">
-            {msg}
-            <span className="ml-8 text-[#2775CA]/20">◆</span>
+    <div className="ticker-wrap border-b border-white/[0.04] bg-white/[0.01] py-2">
+      <div className="ticker-inner">
+        {items.map((t, i) => (
+          <span key={i} className="shrink-0 px-6 text-[12px] text-[#4A9AE8]/50 whitespace-nowrap select-none">
+            {t}
+            <span className="ml-6 text-[#2775CA]/15">◆</span>
           </span>
         ))}
       </div>

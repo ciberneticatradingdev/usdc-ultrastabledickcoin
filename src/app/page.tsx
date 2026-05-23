@@ -1,34 +1,26 @@
 import ParticleBackground from "@/components/ParticleBackground";
 import Ticker from "@/components/Ticker";
 import Hero from "@/components/Hero";
-import ATMStats from "@/components/ATMStats";
-import ATMFeed from "@/components/ATMFeed";
-import TopHolders from "@/components/TopHolders";
-import HowATMWorks from "@/components/HowATMWorks";
+import Stats from "@/components/Stats";
+import Panels from "@/components/Panels";
+import HowItWorks from "@/components/HowItWorks";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <div className="relative min-h-screen flex flex-col">
       <ParticleBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex-1 flex flex-col">
         <Ticker />
-        <Hero />
-        <ATMStats />
+        <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6">
+          <Hero />
+          <Stats />
+          <Panels />
+          <HowItWorks />
+        </main>
 
-        {/* Live panels */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-[1100px] mx-auto mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4" style={{ minHeight: "460px" }}>
-            <div className="lg:col-span-3"><ATMFeed /></div>
-            <div className="lg:col-span-2"><TopHolders /></div>
-          </div>
-        </section>
-
-        <HowATMWorks />
-
-        {/* Footer */}
-        <footer className="text-center py-8 border-t border-white/[0.04]">
-          <p className="text-[10px] text-gray-600 uppercase tracking-[0.12em]">
+        <footer className="w-full text-center py-6 border-t border-white/[0.03]">
+          <p className="text-[10px] text-gray-600 tracking-[0.12em] uppercase">
             $ATM — What Is A Bank Without An ATM? 🏧
           </p>
           <p className="text-[9px] text-gray-700 mt-1">
@@ -36,6 +28,6 @@ export default function Home() {
           </p>
         </footer>
       </div>
-    </main>
+    </div>
   );
 }
