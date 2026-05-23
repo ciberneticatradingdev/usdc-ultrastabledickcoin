@@ -3,16 +3,16 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "$USDC — Ultra Stable Dick Coin",
-  description: "What is a bank without an ATM? Creator rewards redistributed to holders every 90 seconds. Ultra stable. Definitely not a security.",
+  title: "$ATM — What Is A Bank Without An ATM?",
+  description: "Every 90 seconds, creator rewards are claimed and redistributed as USDC to all $ATM holders. Fully automated. On Solana.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );

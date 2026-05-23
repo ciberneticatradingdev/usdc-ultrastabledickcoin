@@ -8,31 +8,33 @@ export default function ParticleBackground() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const particles: HTMLDivElement[] = [];
+    const ps: HTMLDivElement[] = [];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
       const p = document.createElement("div");
-      const size = Math.random() * 3 + 1.5;
+      const size = Math.random() * 2.5 + 1;
       p.className = "particle";
-      p.style.width = `${size}px`;
-      p.style.height = `${size}px`;
-      p.style.left = `${Math.random() * 100}%`;
-      p.style.background = `rgba(39, 117, 202, ${Math.random() * 0.25 + 0.1})`;
-      p.style.boxShadow = `0 0 ${size * 3}px rgba(39, 117, 202, 0.25)`;
-      p.style.animationDuration = `${Math.random() * 18 + 12}s`;
-      p.style.animationDelay = `${Math.random() * 8}s`;
+      Object.assign(p.style, {
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${Math.random() * 100}%`,
+        background: `rgba(39,117,202,${Math.random() * 0.2 + 0.08})`,
+        boxShadow: `0 0 ${size * 3}px rgba(39,117,202,0.2)`,
+        animationDuration: `${Math.random() * 20 + 14}s`,
+        animationDelay: `${Math.random() * 10}s`,
+      });
       el.appendChild(p);
-      particles.push(p);
+      ps.push(p);
     }
-
-    return () => particles.forEach((p) => p.remove());
+    return () => ps.forEach((p) => p.remove());
   }, []);
 
   return (
     <>
+      {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-15%] left-[20%] w-[700px] h-[700px] rounded-full bg-[#2775CA]/[0.025] blur-[140px]" />
-        <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#2775CA]/[0.02] blur-[120px]" />
+        <div className="absolute top-[-20%] left-[15%] w-[700px] h-[700px] rounded-full bg-[#2775CA]/[0.02] blur-[160px]" />
+        <div className="absolute bottom-[-15%] right-[5%] w-[600px] h-[600px] rounded-full bg-[#2775CA]/[0.015] blur-[140px]" />
       </div>
       <div ref={ref} className="fixed inset-0 pointer-events-none z-0" />
     </>

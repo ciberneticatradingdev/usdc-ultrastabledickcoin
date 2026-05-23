@@ -2,76 +2,65 @@
 
 import { useState, useEffect } from "react";
 
-function CountdownTimer() {
-  const [seconds, setSeconds] = useState(90);
-  const [distributing, setDistributing] = useState(false);
+/* ── Countdown 90s ── */
+function Countdown() {
+  const [sec, setSec] = useState(90);
+  const [dispensing, setDispensing] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((prev) => {
-        if (prev <= 1) {
-          setDistributing(true);
-          setTimeout(() => {
-            setDistributing(false);
-            setSeconds(90);
-          }, 3000);
+    const id = setInterval(() => {
+      setSec((p) => {
+        if (p <= 1) {
+          setDispensing(true);
+          setTimeout(() => { setDispensing(false); setSec(90); }, 3000);
           return 0;
         }
-        return prev - 1;
+        return p - 1;
       });
     }, 1000);
-    return () => clearInterval(interval);
+    return () => clearInterval(id);
   }, []);
 
-  if (distributing) {
-    return (
-      <span className="text-lg font-bold text-[#2775CA] animate-pulse">
-        DISPENSING... 🏧
-      </span>
-    );
-  }
+  if (dispensing)
+    return <span className="text-lg font-bold text-[#2775CA] animate-pulse">DISPENSING... 🏧</span>;
 
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
   return (
-    <span className={`text-2xl font-bold tabular-nums tracking-wider ${seconds <= 15 ? "text-[#2775CA] animate-pulse" : "text-white"}`}>
-      {String(mins).padStart(2, "0")}:{String(secs).padStart(2, "0")}
+    <span className={`text-2xl font-bold tabular-nums tracking-wider ${sec <= 15 ? "text-[#2775CA] animate-pulse" : "text-white"}`}>
+      {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")}
     </span>
   );
 }
 
-interface StatProps {
-  label: string;
-  value?: string;
-  unit?: string;
-  children?: React.ReactNode;
-}
-
-function Stat({ label, value, unit, children }: StatProps) {
+/* ── Single stat ── */
+function Stat({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="stat-card animate-fade-in-up">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">
-        {label}
-      </p>
-      {children ?? (
-        <div>
-          <span className="text-2xl font-bold text-white">{value}</span>
-          {unit && <span className="ml-2 text-xs font-medium text-gray-500 uppercase">{unit}</span>}
-        </div>
-      )}
+    <div className="stat-card">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1.5">{label}</p>
+      {children}
     </div>
   );
 }
 
 export default function ATMStats() {
   return (
-    <section className="px-4 sm:px-6 lg:px-8 max-w-[1200px] mx-auto mb-10">
+    <section className="px-4 sm:px-6 lg:px-8 max-w-[1100px] mx-auto mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <Stat label="Total Distributed" value="$4,821" unit="USDC" />
-        <Stat label="ATM Holders" value="1,247" />
-        <Stat label="Distributions" value="3,892" unit="rounds" />
-        <Stat label="Next ATM Dispense">
-          <CountdownTimer />
+        <Stat label="Total Distributed">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-2xl font-bold text-white">$4,821</span>
+            <span className="text-[10px] font-medium text-[#2775CA]">USDC</span>
+          </div>
+        </Stat>
+        <Stat label="$ATM Holders">
+          <span className="text-2xl font-bold text-white">1,247</span>
+        </Stat>
+        <Stat label="Total Rounds">
+          <span className="text-2xl font-bold text-white">3,892</span>
+        </Stat>
+        <Stat label="Next Dispense">
+          <Countdown />
         </Stat>
       </div>
     </section>
